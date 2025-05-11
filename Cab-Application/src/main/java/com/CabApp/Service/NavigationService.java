@@ -6,8 +6,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,7 +31,7 @@ public class NavigationService {
 
 	
 	
-	public double[] getCoordinates(String address) throws JsonMappingException, JsonProcessingException {
+	public double[] getCoordinates(String address) throws Exception {
 		String url = UriComponentsBuilder.fromUriString(GEOCODE_URL)
 								.queryParam("api_key", API_KEY)
 								.queryParam("text", address)
@@ -55,7 +53,7 @@ public class NavigationService {
 		return new double[] {lon,lat};
 	}
 	
-	public double getDistance(double startLon, double startLat, double endLon, double endLat) throws JsonMappingException, JsonProcessingException {
+	public double getDistance(double startLon, double startLat, double endLon, double endLat) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set("Authorization", API_KEY);
 		headers.setContentType(MediaType.APPLICATION_JSON);

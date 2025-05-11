@@ -45,9 +45,12 @@ public class CustomerService {
 	}
 	
 	public String logIn(LoginRequest loginRequest) throws Exception {
+		log.debug("Entering Customer login method");
 		Authentication auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),loginRequest.getPassword()));
 		UserDetails userDetails = (UserDetails) auth.getPrincipal();
+		log.debug("Jwt generation started");
 		String jwtToken = jwtUtil.generateToken(userDetails.getUsername());
+		log.debug("Exiting Customer login method");
 		return jwtToken;
 	}
 

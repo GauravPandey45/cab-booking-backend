@@ -26,7 +26,7 @@ public class SecurityConfig {
 	JwtFilter jwtFilter;
 	
 	@Bean
-	private SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return	http.csrf(csrf -> csrf.disable())
 					.authorizeHttpRequests(authorize -> authorize
 							.requestMatchers("/customers/**","/drivers/**").permitAll()
@@ -39,7 +39,7 @@ public class SecurityConfig {
 	}
 	
 	@Bean
-	private AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 	

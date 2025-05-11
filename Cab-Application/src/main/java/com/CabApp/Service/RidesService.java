@@ -80,7 +80,7 @@ public class RidesService {
 	public String completeRide() {
 		Customers customer =  customerRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		if(customer == null) {
-			log.error("Customer Not Found for username {}", customer.getUsername());
+			log.error("Customer Not Found for username {}", SecurityContextHolder.getContext().getAuthentication().getName());
 			return "Customer Not Found";
 		}
 		
@@ -110,14 +110,14 @@ public class RidesService {
 		driverdetail.setStatus(DriverStatus.AVAILABLE);
 		driversRepository.save(driverdetail);
 		log.info("Ride {} completed successfully for customer {} and driver {}", rides.getRideId(), rides.getCustomerId(), rides.getDriverId() );
-		return "Ride Completed";
+		return "Ride Completed Successfully for rideId: "+rides.getRideId();
 	}
 	
 	@Transactional
 	public String cancelRide() {
 		Customers customer =  customerRepository.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
 		if(customer == null) {
-			log.error("Customer Not Found for username {}", customer.getUsername());
+			log.error("Customer Not Found for username {}", SecurityContextHolder.getContext().getAuthentication().getName());
 			return "Customer Not Found";
 		}
 		
@@ -147,7 +147,7 @@ public class RidesService {
 		driverdetail.setStatus(DriverStatus.AVAILABLE);
 		driversRepository.save(driverdetail);
 		log.info("Ride {} cancelled for customer {} and driver {}", rides.getRideId(), rides.getCustomerId(), rides.getDriverId() );
-		return "Ride Cancelled";
+		return "Ride Cancelled Sucessfully for rideId: "+rides.getRideId();
 		
 	}
 	
